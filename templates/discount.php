@@ -44,10 +44,15 @@
         <?php if ($_location['country']['region']): ?>
         - <?= $_location['country']['region'] ?>
         <?php endif ?>
-
-
       </div>
       <?php endforeach ?>
+    </div>
+    <?php endif ?>
+    <?php if ($data['discount']['image']): ?>
+    <div class="p1">
+      <figure>
+        <img class="image" src="<?= $data['discount']['image'] ?>" alt="">
+      </figure>
     </div>
     <?php endif ?>
 
