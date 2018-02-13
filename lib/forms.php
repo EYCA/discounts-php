@@ -27,7 +27,7 @@ function formitem($key, $pattern)
   if (empty($_GET[$key])) return NULL;
   $input = $_GET[$key];
   if ('string' !== gettype($input)) throw new \Exception('invalid type: ' . $key);
-  if (!preg_match('#^' . $pattern . '$#', $input)) throw new \Exception('invalid value: ' . $key);
+  if (!preg_match('#^' . $pattern . '$#u', $input)) throw new \Exception('invalid value: ' . $key);
   return $input;
 }
 
