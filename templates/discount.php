@@ -15,7 +15,7 @@
         <?php if ($data['discount']['categories']): ?>
         <p class="p025 lh4"><?= join(', ', array_map(function ($a) { return $a['name']; }, $data['discount']['categories'])) ?></p>
         <?php endif ?>
-        <?php if ($_tags = array_intersect($data['options']['tags'], $data['discount']['tags'])): ?>
+        <?php if ($data['discount']['tags'] and $_tags = array_intersect($data['options']['tags'], $data['discount']['tags'])): ?>
         <p class="p025 lh4"><?= join(', ', $_tags) ?></p>
         <?php endif ?>
       </div>
