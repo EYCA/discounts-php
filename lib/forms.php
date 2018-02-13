@@ -9,12 +9,13 @@ function formdata()
     if ($_GET) {
       $data = [
         'country' => formitem('country', '[A-Z]{2}( [A-Z][\w\s\-]*)?'),
+        'region' => formitem('region', '[A-Z][\w\s\-]*'),
         'category' => formitem('category', '[A-Z]{2}'),
         'tag' => formitem('tag', '[a-z\-]+'),
         'pageno' => formitem('pageno', '\d+'),
         'id' => formitem('id', '[a-f\d]{24}'),
       ];
-      if ($data['country']) {
+      if ($data['country'] and !$data['region']) {
         $country = explode(' ', $data['country']);
         $data['country'] = $country[0];
         $data['region'] = join(' ', array_slice($country, 1)) ?: NULL;
@@ -22,6 +23,7 @@ function formdata()
     } else {
       $data = array_replace([
         'country' => NULL,
+        'region' => NULL,
         'category' => NULL,
         'tag' => NULL,
         'pageno' => NULL,
