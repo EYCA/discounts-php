@@ -6,17 +6,27 @@ function formdata()
 {
   static $data;
   if (!$data) {
-    $data = [
-      'country' => formitem('country', '[A-Z]{2}( [A-Z][\w\s\-]*)?'),
-      'category' => formitem('category', '[A-Z]{2}'),
-      'tag' => formitem('tag', '[a-z\-]+'),
-      'pageno' => formitem('pageno', '\d+'),
-      'id' => formitem('id', '[a-f\d]{24}'),
-    ];
-    if ($data['country']) {
-      $country = explode(' ', $data['country']);
-      $data['country'] = $country[0];
-      $data['region'] = join(' ', array_slice($country, 1)) ?: NULL;
+    if ($_GET) {
+      $data = [
+        'country' => formitem('country', '[A-Z]{2}( [A-Z][\w\s\-]*)?'),
+        'category' => formitem('category', '[A-Z]{2}'),
+        'tag' => formitem('tag', '[a-z\-]+'),
+        'pageno' => formitem('pageno', '\d+'),
+        'id' => formitem('id', '[a-f\d]{24}'),
+      ];
+      if ($data['country']) {
+        $country = explode(' ', $data['country']);
+        $data['country'] = $country[0];
+        $data['region'] = join(' ', array_slice($country, 1)) ?: NULL;
+      }
+    } else {
+      $data = array_replace([
+        'country' => NULL,
+        'category' => NULL,
+        'tag' => NULL,
+        'pageno' => NULL,
+        'id' => NULL,
+      ], config()['search']['default']);
     }
   }
   return $data;
@@ -45,10 +55,10 @@ function paginate($total, $perpage, $pageno) {
   ];
 }
 
-function link_to($params = [], $include = FALSE)
+function link_to($params = NULL, $include = FALSE)
 {
   $url = parse_url(config()['self']);
-  $include = ($include and isset($url['query'])) ? $_GET : [];
-  $query = array_filter(array_replace($include, $params));
+  $include = $include ? formdata() : [];
+  $query = array_filter(array_replace($include, $params ?: []));
   return $url['path'] . ($query ? '?' . http_build_query($query) : '');
 }

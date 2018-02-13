@@ -2,7 +2,7 @@
 <div class="p1 row justify-center">
   <?php /* prev */ ?>
   <?php if ($data['paginate']['pageno'] > 0): ?>
-  <a class="show p05 color-black-50" href="<?= Eyca\link_to([ 'pageno' => $data['paginate']['pageno'] > 1 ? $data['paginate']['pageno'] : NULL ], TRUE) ?>">&lt;</a>
+  <a class="show p05 color-black-50" href="<?= Eyca\link_to([ 'pageno' => $data['paginate']['pageno'] ], TRUE) ?>">&lt;</a>
   <?php endif ?>
   <?php /* first */ ?>
   <?php if ($data['paginate']['min'] > 0): ?>
@@ -14,7 +14,7 @@
   <?php if ($i === $data['paginate']['pageno']): ?>
   <span class="show p05 bold"><?= $i + 1 ?></span>
   <?php else: ?>
-  <a class="show p05 color-black-50" href="<?= Eyca\link_to([ 'pageno' => $i ? $i + 1 : NULL ], TRUE) ?>"><?= $i + 1 ?></a>
+  <a class="show p05 color-black-50" href="<?= Eyca\link_to([ 'pageno' => $i + 1 ], TRUE) ?>"><?= $i + 1 ?></a>
   <?php endif ?>
   <?php endforeach ?>
   <?php /* last */ ?>

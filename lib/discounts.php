@@ -2,7 +2,7 @@
 
 namespace Eyca;
 
-function get_options($filter)
+function get_options()
 {
   $data = query('
     {
@@ -11,26 +11,13 @@ function get_options($filter)
       countries { id name regions }
     }
   ');
-  $data['regions'] = [];
-  if ($filter['country'] !== FALSE) {
-    foreach ($data['countries'] as $_country) {
-      if (isset($_country['regions']) and (empty($filter['country']) or $filter['country'] === $_country['id'])) {
-        foreach ($_country['regions'] as $_region) {
-          $data['regions'][] = [
-            'name' => $_region,
-            'countryId' => $_country['id'],
-          ];
-        }
-      }
-    }
-  }
   return $data;
 }
 
 function get_options_cached($ttl = CACHE_TTL)
 {
-  return cache('options', config()['search'], function () {
-    return get_options(config()['search']);
+  return cache('options', NULL, function () {
+    return get_options();
   }, CACHE_TTL);
 }
 
@@ -50,7 +37,7 @@ function get_discounts($variables)
         }
       }
     }
-  ', array_replace($variables, parse_array(config()['search'])))['discounts'];
+  ', $variables)['discounts'];
 }
 
 function get_discounts_cached($variables, $ttl = CACHE_TTL)
@@ -59,6 +46,7 @@ function get_discounts_cached($variables, $ttl = CACHE_TTL)
     return get_discounts($variables);
   }, CACHE_TTL);
 }
+
 function get_discount($id)
 {
   return query('
@@ -88,16 +76,4 @@ function get_discount_cached($id, $ttl = CACHE_TTL)
   return cache('discount', $id, function () use ($id) {
     return get_discount($id);
   }, CACHE_TTL);
-}
-
-function parse_array($arr)
-{
-  if (!$arr) {
-    return [];
-  }
-  return array_map(function ($item) {
-    return $item ?: NULL;
-  }, array_filter($arr, function ($item) {
-    return !($item === NULL);
-  }));
 }

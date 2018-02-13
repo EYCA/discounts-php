@@ -7,10 +7,19 @@ return [
     'url' => 'http://dev.eyca.org/api',
   ],
   'search' => [
-    'country' => NULL,
-    'region' => NULL,
-    'category' => NULL,
-    'tag' => NULL,
+    'restrict' => [
+      'member' => NULL,
+      'country' => NULL,
+      'region' => NULL,
+      'category' => NULL,
+      'tag' => NULL,
+    ],
+    'default' => [
+      'country' => NULL,
+      'region' => NULL,
+      'category' => NULL,
+      'tag' => NULL,
+    ],
   ],
   'paginate' => [
     'perpage' => 50,

@@ -1,7 +1,7 @@
 <div class="p05">
-  <form action="<?= htmlspecialchars(Eyca\config()['self']) ?>" method="get">
+  <form action="<?= htmlspecialchars(Eyca\link_to()) ?>" method="get">
     <div class="row p025">
-      <?php if (!isset(Eyca\config()['search']['country'])): ?>
+      <?php if (!isset(Eyca\config()['search']['restrict']['country'])): ?>
       <label class="p0125">
         <div class="p0125">Country</div>
         <div class="p0125">
@@ -12,7 +12,7 @@
               value="<?= $_country['id'] ?>"
               <?php if (Eyca\formdata()['country'] === $_country['id'] and !Eyca\formdata()['region']): ?>selected<?php endif ?>
             ><?= $_country['name'] ?></option>
-            <?php if (isset($_country['regions']) and !isset(Eyca\config()['search']['region'])): ?>
+            <?php if (isset($_country['regions']) and !isset(Eyca\config()['search']['restrict']['region'])): ?>
             <?php foreach ($_country['regions'] as $_region): ?>
             <option
               value="<?= $_country['id'] ?> <?= $_region ?>"
@@ -25,7 +25,7 @@
         </div>
       </label>
       <?php endif ?>
-      <?php if (!isset(Eyca\config()['search']['category'])): ?>
+      <?php if (!isset(Eyca\config()['search']['restrict']['category'])): ?>
       <label class="p0125">
         <div class="p0125">Category</div>
         <div class="p0125">
@@ -41,7 +41,7 @@
         </div>
       </label>
       <?php endif ?>
-      <?php if (!isset(Eyca\config()['search']['tag'])): ?>
+      <?php if (!isset(Eyca\config()['search']['restrict']['tag'])): ?>
       <label class="p0125">
         <div class="p0125">Tag</div>
         <div class="p0125">
@@ -63,7 +63,7 @@
         or !empty(Eyca\formdata()['region'])
         or !empty(Eyca\formdata()['category'])
         or !empty(Eyca\formdata()['tag'])): ?>
-      <div class="p025"><a class="f2 ul" href="<?= htmlspecialchars(explode('?', Eyca\config()['self'])[0]) ?>">reset</a></div>
+      <div class="p025"><a class="f2 ul" href="<?= htmlspecialchars(Eyca\link_to([ 'pageno' => 1 ])) ?>">reset</a></div>
       <?php endif ?>
     </div>
   </form>
