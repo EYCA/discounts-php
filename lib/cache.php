@@ -25,10 +25,12 @@ if (!is_writable(CACHE_DIR)) {
 // cache fnc
 function cache($ns, $key, $callback, $ttl = CACHE_TTL)
 {
-  $file = CACHE_DIR . DS . $ns . '-' . md5(serialize($key)) . '.json';
+  $file = CACHE_DIR . DS . $ns . '-' . md5(config()['api']['url'] . serialize($key)) . '.json';
+  /*
   if (file_exists($file) and filemtime($file) + $ttl >= time()) {
     return json_decode(file_get_contents($file), TRUE);
   }
+  */
   $data = $callback();
   file_put_contents($file, json_encode($data));
   return $data;

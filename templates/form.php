@@ -1,7 +1,23 @@
 <div class="p05">
   <form action="<?= htmlspecialchars(Eyca\link_to()) ?>" method="get">
     <div class="row p025">
-      <?php if (!isset(Eyca\config()['search']['restrict']['country'])): ?>
+      <?php if (isset($data['options']['regions']) and !isset(Eyca\config()['search']['restrict']['region'])): ?>
+      <label class="p0125">
+        <div class="p0125">Regions</div>
+        <div class="p0125">
+          <select name="region">
+            <option></option>
+            <?php foreach ($data['options']['regions'] as $_region): ?>
+            <option
+              value="<?= $_region ?>"
+              <?php if (Eyca\formdata()['region'] === $_region): ?>selected<?php endif ?>
+            ><?= $_region ?></option>
+            <?php endforeach ?>
+          </select>
+        </div>
+      </label>
+      <?php elseif (!isset(Eyca\config()['search']['restrict']['country'])
+        and (count($data['options']['countries']) > 1 or $data['options']['countries'][0]['regions'])): ?>
       <label class="p0125">
         <div class="p0125">Country</div>
         <div class="p0125">

@@ -11,12 +11,33 @@ function get_options()
       countries { id name regions }
     }
   ');
+  if ($restrict = config()['search']['restrict']) {
+    if ($restrict['member']) {
+      $data = array_replace($data, query('
+      query ($member: ID) {
+        discounts(member: $member) {
+          countries { id name regions }
+        }
+      }
+      ', $restrict)['discounts']);
+    }
+    if ($restrict['country'] and !$restrict['region']) {
+      foreach ($data['countries'] as $item) {
+        if ($item['id'] === $restrict['country']) {
+          if ($item['regions']) {
+            $data['regions'] = $item['regions'];
+          }
+          break;
+        }
+      }
+    }
+  }
   return $data;
 }
 
 function get_options_cached($ttl = CACHE_TTL)
 {
-  return cache('options', NULL, function () {
+  return cache('options', config()['search']['restrict'], function () {
     return get_options();
   }, CACHE_TTL);
 }
@@ -24,7 +45,7 @@ function get_options_cached($ttl = CACHE_TTL)
 function get_discounts($variables)
 {
   return query('
-    query($member: ID, $country: String, $region: String, $category: String, $tag: String, $type: DiscountType, $skip: Int, $limit: Int) {
+    query ($member: ID, $country: String, $region: String, $category: String, $tag: String, $type: DiscountType, $skip: Int, $limit: Int) {
       discounts(member: $member, country: $country, region: $region, category: $category, tag: $tag, type: $type) {
         count
         data(skip: $skip, limit: $limit) {
