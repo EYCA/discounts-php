@@ -45,8 +45,10 @@ function formitem($key, $pattern)
 
 function paginate($total, $perpage, $pageno) {
   $pages = intval(ceil($total / $perpage));
-  $min = ($pages > 9 ? (($pageno > $pages - 3 ? $pages - 5 : NULL) ?? ($pageno > 0 + 4 ? $pageno - 2 : NULL)) : NULL) ?? 0;
-  $max = ($pages > 9 ? (($pageno < 3 ? $min + 5 : NULL) ?? ($pageno < $pages - 5 ? $pageno + 3 : NULL)) : NULL) ?? $pages;
+  $min = ($pages > 9 ? (($pageno > $pages - 3 ? $pages - 5 : NULL) ?: ($pageno > 0 + 4 ? $pageno - 2 : NULL)) : NULL);
+  $max = ($pages > 9 ? (($pageno < 3 ? $min + 5 : NULL) ?: ($pageno < $pages - 5 ? $pageno + 3 : NULL)) : NULL);
+  if (!$min) $min = 0;
+  if (!$max) $max = $pages;
   return [
     'total'   => $total,
     'pageno'  => $pageno,
