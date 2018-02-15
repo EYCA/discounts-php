@@ -1,8 +1,9 @@
 <div class="p05">
   <form action="<?= htmlspecialchars(Eyca\link_to()) ?>" method="get">
-    <div class="row p025">
+    <div class="p025">
+    <div class="row">
       <?php if (isset($data['options']['regions']) and !isset(Eyca\config()['search']['restrict']['region'])): ?>
-      <label class="p0125">
+      <label class="p0125" style="display: block;">
         <div class="p0125">Regions</div>
         <div class="p0125">
           <select name="region">
@@ -18,7 +19,7 @@
       </label>
       <?php elseif (!isset(Eyca\config()['search']['restrict']['country'])
         and (count($data['options']['countries']) > 1 or $data['options']['countries'][0]['regions'])): ?>
-      <label class="p0125">
+      <label class="p0125" style="display: block;">
         <div class="p0125">Country</div>
         <div class="p0125">
           <select name="country">
@@ -42,7 +43,7 @@
       </label>
       <?php endif ?>
       <?php if (!isset(Eyca\config()['search']['restrict']['category'])): ?>
-      <label class="p0125">
+      <label class="p0125" style="display: block;">
         <div class="p0125">Category</div>
         <div class="p0125">
           <select name="category">
@@ -58,7 +59,7 @@
       </label>
       <?php endif ?>
       <?php if (!isset(Eyca\config()['search']['restrict']['tag'])): ?>
-      <label class="p0125">
+      <label class="p0125" style="display: block;">
         <div class="p0125">Tag</div>
         <div class="p0125">
           <select name="tag">
@@ -81,6 +82,7 @@
         or !empty(Eyca\formdata()['tag'])): ?>
       <div class="p025"><a class="f2 ul" href="<?= htmlspecialchars(Eyca\link_to([ 'pageno' => 1 ])) ?>">reset</a></div>
       <?php endif ?>
+    </div>
     </div>
   </form>
 </div>

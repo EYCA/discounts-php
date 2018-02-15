@@ -12,11 +12,11 @@
                   width="50"
                   height="50"
                   viewBox="0 0 1 1"
-                  <?php if ($_discount['image']): ?>style="background-image: url(<?= $_discount['image'] ?>);"<?php endif ?>
+                  style="width: 50px; height: 50px; <?php if ($_discount['image']): ?>background-image: url(<?= $_discount['image'] ?>);<?php endif ?>"
                 ></svg>
               </a>
             </div>
-            <div class="span1 p025 f2 lh4">
+            <div class="p025 f2 lh4" style="width: 100%;">
               <a class="color-blue ul" href="<?= htmlspecialchars($_href) ?>"><?= $_discount['vendor'] ?></a><br><?= $_discount['name'] ?>
             </div>
           </div>
