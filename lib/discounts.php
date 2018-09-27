@@ -8,17 +8,17 @@ function get_options()
     {
       categories { id name }
       tags
-      countries { id name regions }
+      countries(members: true) { id name regions }
     }
   ');
   if ($restrict = config()['search']['restrict']) {
     if ($restrict['member']) {
       $data = array_replace($data, query('
-      query ($member: ID) {
-        discounts(member: $member) {
-          countries { id name regions }
+        query ($member: ID) {
+          discounts(member: $member) {
+            countries { id name regions }
+          }
         }
-      }
       ', $restrict)['discounts']);
     }
     if ($restrict['country'] and !$restrict['region']) {
