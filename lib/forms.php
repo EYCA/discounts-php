@@ -12,6 +12,7 @@ function formdata()
         'region' => formitem('region', '[A-Z][\w\s\-]*'),
         'category' => formitem('category', '[A-Z]{2}'),
         'tag' => formitem('tag', '[a-z\-]+'),
+        'keyword' => formitem('keyword', '.*'),
         'pageno' => formitem('pageno', '\d+'),
         'id' => formitem('id', '[a-f\d]{24}'),
       ];
@@ -26,6 +27,7 @@ function formdata()
         'region' => NULL,
         'category' => NULL,
         'tag' => NULL,
+        'keyword' => NULL,
         'pageno' => NULL,
         'id' => NULL,
       ], config()['search']['default']);

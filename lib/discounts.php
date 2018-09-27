@@ -45,8 +45,8 @@ function get_options_cached($ttl = CACHE_TTL)
 function get_discounts($variables)
 {
   return query('
-    query ($member: ID, $country: String, $region: String, $category: String, $tag: String, $type: DiscountType, $skip: Int, $limit: Int) {
-      discounts(member: $member, country: $country, region: $region, category: $category, tag: $tag, type: $type) {
+    query ($member: ID, $country: String, $region: String, $category: String, $tag: String, $keyword: String, $type: DiscountType, $skip: Int, $limit: Int) {
+      discounts(member: $member, country: $country, region: $region, category: $category, tag: $tag, query: $keyword, type: $type) {
         count
         data(skip: $skip, limit: $limit) {
           id

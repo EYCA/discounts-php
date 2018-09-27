@@ -24,6 +24,9 @@ return [
       // (string) tag; query for available tags via API `{ tags }`
       // set FALSE to prevent user input
       'tag' => NULL,
+      // (string) keyword
+      // set FALSE to prevent user input
+      'keyword' => NULL,
     ],
     // (array) set default search query
     'default' => [
@@ -31,6 +34,7 @@ return [
       'region' => NULL,
       'category' => NULL,
       'tag' => NULL,
+      'keyword' => NULL,
     ],
   ],
   // (array) pagination

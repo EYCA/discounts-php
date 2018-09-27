@@ -73,13 +73,26 @@
         </div>
       </label>
       <?php endif ?>
+      <?php if (!isset(Eyca\config()['search']['restrict']['keyword'])): ?>
+      <label class="p0125" style="display: block;">
+        <div class="p0125">Keyword</div>
+        <div class="p0125">
+          <input
+            type="text"
+            name="keyword"
+            value="<?= htmlspecialchars(Eyca\formdata()['keyword']) ?>"
+          >
+        </div>
+      </label>
+      <?php endif ?>
     </div>
     <div class="row justify-start items-center">
       <div class="p025"><button type="submit">Search</button></div>
       <?php if (!empty(Eyca\formdata()['country'])
         or !empty(Eyca\formdata()['region'])
         or !empty(Eyca\formdata()['category'])
-        or !empty(Eyca\formdata()['tag'])): ?>
+        or !empty(Eyca\formdata()['tag'])
+        or !empty(Eyca\formdata()['keyword'])): ?>
       <div class="p025"><a class="f2 ul" href="<?= htmlspecialchars(Eyca\link_to([ 'pageno' => 1 ])) ?>">reset</a></div>
       <?php endif ?>
     </div>
