@@ -4,8 +4,8 @@ namespace Eyca;
 
 return [
   'api' => [
-    // API url; will be changed to http://www.eyca.org/api once the new site goes live
-    'url' => 'http://dev.eyca.org/api',
+    // API url
+    'url' => 'https://www.eyca.org/api',
   ],
   'search' => [
     // (array) restrict search options to certain parameters
