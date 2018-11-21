@@ -7,7 +7,8 @@
         <h1 class="p05 h3 lh3 fw500"><?= $data['discount']['vendor'] ?></h1>
         <div class="p05"><a class="color-black-50 ul" href="<?= htmlspecialchars(Eyca\link_to([ 'id' => NULL ], TRUE)) ?>">back</a></div>
       </div>
-      <h2 class="p05 h5 lh3 fw700"><?= $data['discount']['name'] ?></h2>
+      <h2 class="p05 h5 lh3"><span class="fw700"><?= $data['discount']['name'] ?></span><br>
+        <span class="fw500"><?= $data['discount']['nameLocal'] ?></span></h2>
     </div>
     <?php if ($data['discount']['categories'] or $data['discount']['tags']): ?>
     <div class="p05">

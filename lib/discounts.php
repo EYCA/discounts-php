@@ -50,7 +50,7 @@ function get_discounts($variables)
         count
         data(skip: $skip, limit: $limit) {
           id
-          name vendor
+          name nameLocal vendor
           image
           locations(country: $country, region: $region) { count }
           categories { id name }
@@ -74,7 +74,7 @@ function get_discount($id)
     query ($id: ID!) {
       discount(id: $id) {
         id
-        name vendor
+        name nameLocal vendor
         text textLocal
         email phone web
         image
